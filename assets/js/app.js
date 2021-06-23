@@ -24,14 +24,32 @@ const startGame = function() {
     start.classList.add('hide');
     setting.start = true;
     gameArea.appendChild(car);
+    setting.x = car.offsetLeft;
+    setting.y = car.offsetTop;
     requestAnimationFrame(playGame);
 };
 
 const playGame = () => {
     console.log("Play game!");
-    if(setting.start) requestAnimationFrame(playGame);
+    if(setting.start) {
+        if(keys.ArrowLeft) {
+            setting.x -= setting.speed;                                            
+        };
+        if(keys.ArrowRight) {
+            setting.x += setting.speed;
+        };
+        if(keys.ArrowDown) {
+            setting.y += setting.speed;
+        };
+        if(keys.ArrowUp) {
+            setting.y -= setting.speed;
+        };
+        car.style.left = `${setting.x}px`;
+        car.style.top = `${setting.y}px`;
+        requestAnimationFrame(playGame);    
+    }   
 };
-      
+
 const startRun = event => {
     event.preventDefault();
     keys[event.key] = true;

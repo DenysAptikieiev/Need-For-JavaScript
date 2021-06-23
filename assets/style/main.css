@@ -2,17 +2,35 @@
     display: none;
 }
 
+.gameArea {
+    width: 300px;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+    background: #000;
+    overflow: hidden;
+}
+
 .red-car {
+    position: absolute;
+    left: 125px;
+    bottom: 10px;
     width: 50px;
     height: 100px;
     background: transparent url('../images/player.png') center / cover no-repeat;
 }
 .blue-coupe-car {
+    position: absolute;
+    left: 125px;
+    bottom: 10px;
     width: 50px;
     height: 100px;
     background: transparent url('../images/enemy2.png') center / cover no-repeat;
 }
 .blue-car {
+    position: absolute;
+    left: 125px;
+    bottom: 10px;
     width: 50px;
     height: 100px;
     background: transparent url('../images/enemy.png') center / cover no-repeat;
