@@ -2,8 +2,18 @@
     display: none;
 }
 
-.car {
+.red-car {
     width: 50px;
     height: 100px;
     background: transparent url('../images/player.png') center / cover no-repeat;
+}
+.blue-coupe-car {
+    width: 50px;
+    height: 100px;
+    background: transparent url('../images/enemy2.png') center / cover no-repeat;
+}
+.blue-car {
+    width: 50px;
+    height: 100px;
+    background: transparent url('../images/enemy.png') center / cover no-repeat;
 }
