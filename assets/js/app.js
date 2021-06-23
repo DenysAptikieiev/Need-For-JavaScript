@@ -7,6 +7,8 @@ const score = document.querySelector('.score'),
     car = document.createElement('div');  
     car.classList.add('red-car');
 
+const Max_Enemy = 7;
+
 const keys = {
     ArrowUp: false,
     ArrowDown: false,
@@ -17,8 +19,8 @@ const keys = {
 const setting = {
     start: false,
     score: 0,
-    speed: 2,
-    traffic: 3,
+    speed: 5,
+    traffic: 1.5,
 }
 
 const getQuantityElements = heightElement => {
@@ -45,8 +47,9 @@ const moveEnemy = () => {
             item.style.left = `${Math.floor((Math.random() * (gameArea.offsetWidth - 50)))}px`;
         }
     });
-
 };
+
+const getRandomEnemy = max => Math.floor((Math.random() * max) + 1);
 
 const startGame = function() {
     start.classList.add('hide');
@@ -65,7 +68,7 @@ const startGame = function() {
         enemy.y = -100 * setting.traffic * (i+1);
         enemy.style.top = `${enemy.y}px`;
         enemy.style.left = `${Math.floor((Math.random() * (gameArea.offsetWidth - 50)))}px`;
-        enemy.style.background = 'transparent url(assets/images/enemy2.png) center / cover no-repeat';
+        enemy.style.background = `transparent url(assets/images/enemy${getRandomEnemy(Max_Enemy)}.png) center / cover no-repeat`;
         gameArea.appendChild(enemy);
     }
 
@@ -81,16 +84,20 @@ const playGame = () => {
     moveRoad();
     moveEnemy();
         if(keys.ArrowLeft && setting.x > 0) {
-            setting.x -= setting.speed;                                            
+            // setting.x -= setting.speed;                                            
+            setting.x --;                                            
         };
         if(keys.ArrowRight && setting.x < gameArea.offsetWidth - car.offsetWidth) {
-            setting.x += setting.speed;
+            // setting.x += setting.speed;
+            setting.x++
         };
         if(keys.ArrowDown && setting.y < gameArea.offsetHeight - car.offsetHeight) {
-            setting.y += setting.speed;
+            // setting.y += setting.speed;
+            setting.y ++;
         };
         if(keys.ArrowUp && setting.y > 0) {
-            setting.y -= setting.speed;
+            // setting.y -= setting.speed;
+            setting.y --;
         };
         car.style.left = `${setting.x}px`;
         car.style.top = `${setting.y}px`;

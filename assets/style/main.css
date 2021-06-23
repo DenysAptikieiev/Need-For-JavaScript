@@ -1,5 +1,5 @@
-.hide {
-    display: none;
+    body {
+    background: green;
 }
 
 .gameArea {
@@ -44,3 +44,6 @@
     left: 145px;
 }
 
+.hide {
+    display: none;
+}
