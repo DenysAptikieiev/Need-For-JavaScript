@@ -23,35 +23,8 @@ const setting = {
     traffic: 1.5,
 }
 
-const getQuantityElements = heightElement => {
-    return Math.floor(document.documentElement.clientHeight /heightElement  + 1);
-};
-
-const moveRoad = () => {
-    let lines = document.querySelectorAll('.line');
-    lines.forEach(line => {
-        line.y += setting.speed;
-        line.style.top = `${line.y}px`;
-
-        if(line.y >= document.documentElement.clientHeight) line.y = -100;
-    });
-};
-
-const moveEnemy = () => {
-    let enemy = document.querySelectorAll('.enemy');
-    enemy.forEach(item => {
-        item.y += setting.speed / 2;
-        item.style.top = `${item.y}px`; 
-        if(item.y >= document.documentElement.clientHeight) {
-            item.y = - 100 * setting.traffic;
-            item.style.left = `${Math.floor((Math.random() * (gameArea.offsetWidth - 50)))}px`;
-        }
-    });
-};
-
-const getRandomEnemy = max => Math.floor((Math.random() * max) + 1);
-
 const startGame = function() {
+    gameArea.innerHTML = '';
     start.classList.add('hide');
 
     for (let i = 0; i < getQuantityElements(50); i++) {
@@ -71,9 +44,14 @@ const startGame = function() {
         enemy.style.background = `transparent url(assets/images/enemy${getRandomEnemy(Max_Enemy)}.png) center / cover no-repeat`;
         gameArea.appendChild(enemy);
     }
-
+    setting.score = 0;
     setting.start = true;
     gameArea.appendChild(car);
+
+    // car.style.left = gameArea.offsetwidth / 2 - car.offsetWeight / 2;
+    // car.style.top = 'auto';
+    // car.style.bootom = `${10}px`;
+
     setting.x = car.offsetLeft;
     setting.y = car.offsetTop;
     requestAnimationFrame(playGame);
@@ -81,8 +59,10 @@ const startGame = function() {
 
 const playGame = () => {
     if(setting.start) {
-    moveRoad();
-    moveEnemy();
+        setting.score += setting.speed;
+        score.innerHTML = `Score:<br> ${setting.score}`;
+        moveRoad();
+        moveEnemy();
         if(keys.ArrowLeft && setting.x > 0) {
             // setting.x -= setting.speed;                                            
             setting.x --;                                            
@@ -107,12 +87,12 @@ const playGame = () => {
 
 const startRun = event => {
     event.preventDefault();
-    keys[event.key] = true;
+   if(keys.hasOwnProperty(event.key)) keys[event.key] = true;
 };
 
 const stopRun = event => {
     event.preventDefault();
-    keys[event.key] = false;
+    if(keys.hasOwnProperty(event.key)) keys[event.key] = false;
 };
 
 document.addEventListener('keydown', startRun);
